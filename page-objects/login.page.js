@@ -1,5 +1,5 @@
-import { $ } from '@wdio/globals'
 import Page from './page.js';
+import {$} from '@support/commands/helpers';
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -13,7 +13,7 @@ class LoginPage extends Page {
     }
 
     get inputPassword () {
-        return $('#password');
+       return $('#password');
     }
 
     get btnSubmit () {
@@ -25,6 +25,7 @@ class LoginPage extends Page {
      * e.g. to login using username and password
      */
     async login (username, password) {
+        console.log(this.inputUsername);
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
         await this.btnSubmit.click();

@@ -4,6 +4,10 @@
             "node",
             "@wdio/globals/types",
             "@wdio/mocha-framework"
-        ]
+        ],
+        "baseUrl": ".",
+        "paths": {
+            "@support/*": ["src/support/*"]
+        }
     }
 }

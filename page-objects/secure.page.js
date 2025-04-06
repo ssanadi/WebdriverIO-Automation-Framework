@@ -1,5 +1,6 @@
-import { $ } from '@wdio/globals'
 import Page from './page.js';
+import {$} from '@support/commands/helpers';
+
 
 /**
  * sub page containing specific selectors and methods for a specific page
