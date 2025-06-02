@@ -1,5 +1,6 @@
 import Page from './page.js';
 import {$} from '@support/commands/helpers';
+import { safeClick } from '@support/commands/safe-interaction';
 
 /**
  * sub page containing specific selectors and methods for a specific page
@@ -28,7 +29,7 @@ class LoginPage extends Page {
         console.log(this.inputUsername);
         await this.inputUsername.setValue(username);
         await this.inputPassword.setValue(password);
-        await this.btnSubmit.click();
+        await safeClick(this.btnSubmit);
     }
 
     /**
