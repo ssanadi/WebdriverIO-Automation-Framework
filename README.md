@@ -116,3 +116,4 @@ npm run report:open
 
 ### **6. Reporting**
 - Test execution results
+  <img width="1601" height="1086" alt="Screenshot 2025-08-15 113936" src="https://github.com/user-attachments/assets/70a87479-4e59-4a50-b340-84e5a2cae186" />
