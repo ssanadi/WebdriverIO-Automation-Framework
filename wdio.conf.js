@@ -20,9 +20,17 @@ export const config = {
     // The path of the spec files will be resolved relative from the directory of
     // of the config file unless it's absolute.
     //
+    //specs: [
+    //    './test/specs/**/*.spec.js'
+    //],
+    framework: 'cucumber',
     specs: [
-        './test/specs/**/*.spec.js'
+      './features/**/*.feature'
     ],
+    cucumberOpts: {
+      require: ['./features/step-definitions/**/*.js'],
+      timeout: parseInt(process.env.TEST_TIMEOUT)
+    },
     // Patterns to exclude.
     exclude: [
         // 'path/to/excluded/files'
@@ -112,7 +120,7 @@ export const config = {
     //
     // Make sure you have the wdio adapter package for the specific framework installed
     // before running any tests.
-    framework: 'mocha',
+    //framework: 'mocha',
     
     //
     // The number of times to retry the entire specfile when it fails as a whole

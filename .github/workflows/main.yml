@@ -1,0 +1,57 @@
+name: WebdriverIO E2E UI Automated Tests
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 2 * * *'  # Runs every day at 2:00 AM UTC
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+
+    env:
+      ENVIRONMENT: ${{ vars.ENVIRONMENT }}
+      RUDDERSTACK_USERNAME: ${{ vars.RUDDERSTACK_USERNAME }}
+      RUDDERSTACK_PASSWORD: ${{ secrets.RUDDERSTACK_PASSWORD }}
+      RUDDERSTACK_BASE_URL: ${{ vars.RUDDERSTACK_BASE_URL }}
+      RUDDERSTACK_WRITE_KEY: ${{ secrets.RUDDERSTACK_WRITE_KEY }}
+      RUDDERSTACK_DATA_PLANE_URL: ${{ vars.RUDDERSTACK_DATA_PLANE_URL }}
+      API_TIMEOUT: 60000
+      WEBHOOK_TIMEOUT: 60000
+      WEBHOOK_BASE_URL: ${{ vars.WEBHOOK_BASE_URL }}
+      BROWSER_HEADLESS: false
+      BROWSER_TIMEOUT: 120000
+      BROWSER_WIDTH: 1920
+      BROWSER_HEIGHT: 1080
+      TEST_TIMEOUT: 120000
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'  # Use your project's Node version
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run WebdriverIO E2E Tests
+        run: npm run wdio
+
+      # Optional: Upload Allure report as an artifact
+      - name: Generate Allure Report
+        if: always()
+        run: |
+          npx allure generate allure-results --clean -o allure-report
+
+      - name: Upload Allure Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report
+          retention-days: 15
