@@ -19,8 +19,8 @@ export const $ = (selector) => {
  * @returns {Promise<Array<ElementWrappers>>} - Array of Wrapped element
  */
 export const $$ = async (selector) => {
-    const elementWrapper =new ElementWrappers(selector);
-    const elements = elementWrapper.elements;
+    const elementWrapper = new ElementWrappers(selector);
+    const elements = await elementWrapper.elements;
     const elementList = [];
     for (const element of elements) {
         elementList.push(element); 
@@ -32,11 +32,11 @@ export const $$ = async (selector) => {
  * Expects a condition and waits until that condition is fulfilled with a truthy valu
  * https://webdriver.io/docs/api/element/waitUntil
  * @param {*} condition - condition to be fulfilled
- * @param {WebdriverIO.WaitUnitOptions} options - named parameters
+ * @param {WebdriverIO.WaitUntilOptions} options - named parameters
  * @returns 
  */
-export const waitUnit = async (condition, options) => {
-    return Client.browser.waitUnit(condition, {...options});
+export const waitUntil = async (condition, options) => {
+    return Client.browser.waitUntil(condition, {...options});
 };
 
 /**

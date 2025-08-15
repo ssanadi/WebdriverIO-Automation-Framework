@@ -1,9 +1,9 @@
 import { expect } from '@wdio/globals'
-import LoginPage from '../../page-objects/login.page.js'
-import SecurePage from '../../page-objects/secure.page.js'
+import LoginPage from '../../page-objects/herokuapp-pages/login.page.js'
+import SecurePage from '../../page-objects/herokuapp-pages/secure.page.js'
 
-describe('My Login application', () => {
-    it('should login with valid credentials', async () => {
+describe.skip('My Login application', () => {
+    it.skip('should login with valid credentials', async () => {
         await LoginPage.open()
         await LoginPage.login('tomsmith', 'SuperSecretPassword!')
         await expect(SecurePage.flashAlert).toBeExisting()

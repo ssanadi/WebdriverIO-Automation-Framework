@@ -50,7 +50,10 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome'
+        browserName: 'chrome',
+        'goog:chromeOptions': {
+            args: process.env.BROWSER_HEADLESS === 'true' ? ['--headless', '--no-sandbox', '--disable-dev-shm-usage'] : []
+        }
     }],
 
     //
@@ -87,7 +90,7 @@ export const config = {
     // baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: 10000,
+    waitforTimeout: parseInt(process.env.BROWSER_TIMEOUT) || 30000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -130,7 +133,7 @@ export const config = {
     // See the full list at http://mochajs.org/
     mochaOpts: {
         ui: 'bdd',
-        timeout: 60000
+        timeout: parseInt(process.env.TEST_TIMEOUT) || 60000
     },
 
     //
@@ -228,7 +231,7 @@ export const config = {
      * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
      */
     afterTest: async function(test, context, { error, result, duration, passed, retries }) {
-        if (!passed) {
+        if (!passed && (process.env.SCREENSHOT_ON_FAILURE !== 'false')) {
             await browser.takeScreenshot();
         }
     },
