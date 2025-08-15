@@ -1,2 +1,10 @@
 node_modules
 allure-results
+allure-report
+
+# Environment variables (contains secrets)
+.env
+
+# Screenshots and videos
+screenshots/
+videos/

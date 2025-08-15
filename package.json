@@ -4,18 +4,24 @@
   "devDependencies": {
     "@wdio/allure-reporter": "^9.12.3",
     "@wdio/cli": "^9.12.4",
+    "@wdio/cucumber-framework": "^9.19.1",
     "@wdio/lighthouse-service": "^9.12.4",
     "@wdio/local-runner": "^9.12.4",
     "@wdio/mocha-framework": "^9.12.3",
     "@wdio/spec-reporter": "^9.12.3",
-    "chromedriver": "^135.0.0",
+    "chromedriver": "^139.0.0",
     "wdio-chromedriver-service": "^8.1.1",
     "wdio-eslinter-service": "^0.0.4"
   },
   "scripts": {
-    "wdio": "wdio run ./wdio.conf.js"
+    "wdio": "wdio run ./wdio.conf.js",
+    "report:generate": "allure generate allure-results --clean",
+    "report:open": "allure open"
   },
   "dependencies": {
+    "@faker-js/faker": "^9.0.0",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
     "WebdriverIO-Automation-Framework": "file:"
   }
 }

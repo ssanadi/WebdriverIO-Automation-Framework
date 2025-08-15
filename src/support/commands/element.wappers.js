@@ -8,6 +8,8 @@ class ElementWrappers {
      */
     constructor(selector) {
         this.selector = selector;
+        this._element = null;
+        this._elements = null;
     }
 
     /**
@@ -15,7 +17,10 @@ class ElementWrappers {
      * @returns {Promise<WebdriverIO.Element>} element
      */
     get element() {
-        return Client.browser.$(this.selector);
+        if (!this._element) {
+            this._element = Client.browser.$(this.selector);
+        }
+        return this._element;
     } 
 
     /**
@@ -23,7 +28,10 @@ class ElementWrappers {
      * @returns {Promise<WebdriverIO.ElementArray>} element array
      */
     get elements() {
-        return Client.browser.$$(this.selector);
+        if (!this._elements) {
+            this._elements = Client.browser.$$(this.selector);
+        }
+        return this._elements;
     }
 }
 export default ElementWrappers;
