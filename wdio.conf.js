@@ -67,26 +67,24 @@ export const config = {
     // https://saucelabs.com/platform/platform-configurator
     //
     capabilities: [{
-        browserName: 'chrome',
-        'goog:chromeOptions': {
-            args: process.env.BROWSER_HEADLESS === 'true' ? [
-                '--headless',
-                '--no-sandbox',
-                '--disable-dev-shm-usage',
-                '--disable-gpu',
-                '--disable-web-security',
-                '--allow-running-insecure-content',
-                '--disable-features=VizDisplayCompositor',
-                '--window-size=1920,1080',
-                '--user-data-dir=/tmp/chrome-user-data-' + Math.random().toString(36).substring(7), // Unique user data dir
-                '--remote-debugging-port=9222'
-            ] : [
-                '--disable-web-security',
-                '--allow-running-insecure-content',
-                '--window-size=1920,1080'
-            ]
-        }
-    }],
+    browserName: 'chrome',
+    'goog:chromeOptions': {
+        args: [
+            ...(process.env.BROWSER_HEADLESS === 'true'
+                ? ['--headless=new']
+                : []),
+            '--no-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-gpu',
+            '--disable-features=VizDisplayCompositor',
+            '--window-size=1920,1080',
+            '--disable-web-security',
+            '--allow-running-insecure-content',
+            `--user-data-dir=/tmp/chrome-user-data-${process.env.GITHUB_RUN_ID || Date.now()}`
+        ]
+    }
+}]
+,
 
     //
     // ===================
