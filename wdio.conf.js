@@ -76,15 +76,14 @@ export const config = {
             '--no-sandbox',
             '--disable-dev-shm-usage',
             '--disable-gpu',
-            '--disable-features=VizDisplayCompositor',
-            '--window-size=1920,1080',
-            '--disable-web-security',
-            '--allow-running-insecure-content',
+            '--disable-setuid-sandbox',
             '--disable-background-timer-throttling',
             '--disable-backgrounding-occluded-windows',
             '--disable-renderer-backgrounding',
-            '--disable-ipc-flooding-protection',
-            '--single-process'
+            '--disable-extensions',
+            '--disable-plugins',
+            '--disable-default-apps',
+            '--window-size=1920,1080'
         ]
     }
     }],
