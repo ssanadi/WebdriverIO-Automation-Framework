@@ -29,6 +29,11 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
+      
+      - name: Setup Chrome
+        uses: browser-actions/setup-chrome@latest
+        with:
+          chrome-version: stable
 
       - name: Run WebdriverIO E2E Tests
         run: npm run wdio
@@ -46,3 +51,10 @@ jobs:
           name: allure-report
           path: allure-report
           retention-days: 15
+      - name: Upload Screenshots
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-screenshots
+          path: screenshots/
+          retention-days: 7

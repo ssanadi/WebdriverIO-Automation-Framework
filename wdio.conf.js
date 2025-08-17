@@ -60,7 +60,7 @@ export const config = {
     // and 30 processes will get spawned. The property handles how many capabilities
     // from the same test should run tests.
     //
-    maxInstances: 10,
+    maxInstances: 1,
     //
     // If you have trouble getting all important capabilities together, check out the
     // Sauce Labs platform configurator - a great tool to configure your capabilities:
@@ -69,7 +69,22 @@ export const config = {
     capabilities: [{
         browserName: 'chrome',
         'goog:chromeOptions': {
-            args: process.env.BROWSER_HEADLESS === 'true' ? ['--headless', '--no-sandbox', '--disable-dev-shm-usage'] : []
+            args: process.env.BROWSER_HEADLESS === 'true' ? [
+                '--headless',
+                '--no-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-gpu',
+                '--disable-web-security',
+                '--allow-running-insecure-content',
+                '--disable-features=VizDisplayCompositor',
+                '--window-size=1920,1080',
+                '--user-data-dir=/tmp/chrome-user-data-' + Math.random().toString(36).substring(7), // Unique user data dir
+                '--remote-debugging-port=9222'
+            ] : [
+                '--disable-web-security',
+                '--allow-running-insecure-content',
+                '--window-size=1920,1080'
+            ]
         }
     }],
 
