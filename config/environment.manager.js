@@ -76,17 +76,6 @@ class EnvironmentManager {
     }
 
     /**
-     * Get webhook configuration
-     * @returns {Object} Webhook-specific config
-     */
-    async getWebhookConfig() {
-        if (!this.initialized) {
-            await this.initialize();
-        }
-        return this.config.webhook;
-    }
-
-    /**
      * Get authentication configuration
      * @returns {Object} Auth-specific config with login credentials
      */

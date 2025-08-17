@@ -28,8 +28,17 @@ export const config = {
       './features/**/*.feature'
     ],
     cucumberOpts: {
-      require: ['./features/step-definitions/**/*.js'],
-      timeout: parseInt(process.env.TEST_TIMEOUT)
+      require: ['./features/step-definitions/**/*.js', './hooks/hooks.js'],
+      timeout: 120000,
+      backtrace: false,
+      requireModule: [],
+      dryRun: false,
+      failFast: false,
+      snippets: true,
+      source: true,
+      strict: false,
+      tagExpression: '',
+      ignoreUndefinedDefinitions: false
     },
     // Patterns to exclude.
     exclude: [
@@ -98,7 +107,7 @@ export const config = {
     // baseUrl: 'http://localhost:8080',
     //
     // Default timeout for all waitFor* commands.
-    waitforTimeout: parseInt(process.env.BROWSER_TIMEOUT) || 30000,
+    waitforTimeout: 120000,
     //
     // Default timeout in milliseconds for request
     // if browser driver or grid doesn't send response
@@ -135,14 +144,21 @@ export const config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: [
+        'spec',
+        ['allure', {
+            outputDir: 'allure-results',
+            disableWebdriverStepsReporting: true,
+            disableWebdriverScreenshotsReporting: false,
+        }]
+    ],
 
     // Options to be passed to Mocha.
     // See the full list at http://mochajs.org/
-    mochaOpts: {
-        ui: 'bdd',
-        timeout: parseInt(process.env.TEST_TIMEOUT) || 60000
-    },
+    // mochaOpts: {
+    //     ui: 'bdd',
+    //     timeout: 120000
+    // },
 
     //
     // =====
@@ -229,20 +245,20 @@ export const config = {
     // afterHook: function (test, context, { error, result, duration, passed, retries }, hookName) {
     // },
     /**
-     * Function to be executed after a test (in Mocha/Jasmine only)
-     * @param {object}  test             test object
-     * @param {object}  context          scope object the test was executed with
-     * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
-     * @param {*}       result.result    return object of test function
-     * @param {number}  result.duration  duration of test
-     * @param {boolean} result.passed    true if test has passed, otherwise false
-     * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
-     */
-    afterTest: async function(test, context, { error, result, duration, passed, retries }) {
-        if (!passed && (process.env.SCREENSHOT_ON_FAILURE !== 'false')) {
-            await browser.takeScreenshot();
-        }
-    },
+    //  * Function to be executed after a test (in Mocha/Jasmine only)
+    //  * @param {object}  test             test object
+    //  * @param {object}  context          scope object the test was executed with
+    //  * @param {Error}   result.error     error object in case the test fails, otherwise `undefined`
+    //  * @param {*}       result.result    return object of test function
+    //  * @param {number}  result.duration  duration of test
+    //  * @param {boolean} result.passed    true if test has passed, otherwise false
+    //  * @param {object}  result.retries   information about spec related retries, e.g. `{ attempts: 0, limit: 0 }`
+    //  */
+    // afterTest: async function(test, context, { error, result, duration, passed, retries }) {
+    //     if (!passed && (process.env.SCREENSHOT_ON_FAILURE !== 'false')) {
+    //         await browser.takeScreenshot();
+    //     }
+    // },
 
 
     /**
