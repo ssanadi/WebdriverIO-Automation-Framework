@@ -46,6 +46,7 @@ When('I get the initial event counts', async () => {
 When('I send a track event via API', async () => {
     const rudderStackAPI = new RudderStackAPI(dataPlaneUrl, writeKey);
     apiResponse = await rudderStackAPI.sendTrackEvent();
+    console.log(`API Response: ${JSON.stringify(apiResponse)}`);
     expect(apiResponse.status).toBe(200);
 });
 
