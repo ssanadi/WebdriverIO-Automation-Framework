@@ -94,13 +94,12 @@ npm run report:open
 - **Generic HTTP client** with axios
 - **Automatic retry logic** with exponential backoff
 - **Authentication handling** for RudderStack API
-- **Configurable timeouts** from environment settings
 
 ### **3. UI Automation**
 - **Page Object Model** implementation
 - **Custom WebdriverIO commands**
 - **Wait strategies** for dynamic content
-- **Cross-browser support**
+- **Chrome-browser support**
 
 ### **4. Test Frameworks**
 - **Cucumber BDD** for readable test scenarios
