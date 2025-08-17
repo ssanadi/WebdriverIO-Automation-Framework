@@ -8,8 +8,10 @@
         "baseUrl": ".",
         "paths": {
             "@support/*": ["src/support/*"],
+            "@support/utils": ["src/support/utils/index.js"],
             "@config/*": ["config/*"],
-            "@page-objects/*": ["page-objects/*"]
+            "@page-objects/*": ["./page-objects/*"],
+            "@api/*": ["src/api-utils/*"]
         }
     }
 }

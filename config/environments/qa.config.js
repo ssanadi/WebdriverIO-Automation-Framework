@@ -1,3 +1,7 @@
+/**
+ * QA Environment Configuration
+ * Contains only environment-specific settings for RudderStack automation
+ */
 export default {
     auth: {
         username: process.env.RUDDERSTACK_USERNAME,
@@ -5,14 +9,14 @@ export default {
     },
     
     rudderstack: {
-        baseUrl: process.env.RUDDERSTACK_BASE_URL || 'https://app.rudderstack.com',
-        dataPlaneUrl: process.env.RUDDERSTACK_DATA_PLANE_URL,
+        baseUrl: 'https://app.rudderstack.com',
+        dataPlaneUrl: 'https://cronackpobkjyq.dataplane.rudderstack.com',
         writeKey: process.env.RUDDERSTACK_WRITE_KEY,
-        timeout: parseInt(process.env.API_TIMEOUT) || 30000
+        timeout: 120000
     },
     
     webhook: {
-        baseUrl: process.env.WEBHOOK_BASE_URL,
-        timeout: parseInt(process.env.WEBHOOK_TIMEOUT) || 15000
+        baseUrl: 'https://rudderstack.requestcatcher.com',
+        timeout: 60000
     }
 };
