@@ -80,11 +80,14 @@ export const config = {
             '--window-size=1920,1080',
             '--disable-web-security',
             '--allow-running-insecure-content',
-            `--user-data-dir=/tmp/chrome-user-data-${process.env.GITHUB_RUN_ID || Date.now()}`
+            '--disable-background-timer-throttling',
+            '--disable-backgrounding-occluded-windows',
+            '--disable-renderer-backgrounding',
+            '--disable-ipc-flooding-protection',
+            '--single-process'
         ]
     }
-}]
-,
+    }],
 
     //
     // ===================
